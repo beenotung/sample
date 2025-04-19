@@ -26,6 +26,18 @@
       .example code {
         padding: 0.25rem 0.5rem;
       }
+      .input-group {
+        margin: 1rem 0;
+      }
+      .input-group label {
+        display: inline-block;
+        min-width: 5rem;
+      }
+      .input-group input {
+        padding: 0.25rem 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+      }
     </style>
   </head>
   <body>
@@ -46,9 +58,17 @@
       </p>
       <div class="example">
         Example:
-        <a href="/image?keyword=cat&seed=123" target="_blank"
-          ><code>/image?keyword=cat&seed=123</code></a
+        <a id="image-link" href="/image?keyword=cat&seed=123" target="_blank"
+          ><code id="image-code">/image?keyword=cat&seed=123</code></a
         >
+      </div>
+      <div class="input-group">
+        <label>Keyword:</label>
+        <input type="text" id="image-keyword" value="cat" />
+      </div>
+      <div class="input-group">
+        <label>Seed:</label>
+        <input type="text" id="image-seed" value="123" />
       </div>
     </div>
 
@@ -59,17 +79,74 @@
         This API returns structured data in JSON format with locale-aware
         values.
       </p>
+      <div class="input-group">
+        <label>Name:</label>
+        <input type="text" id="json-name" value="user" />
+      </div>
+      <div class="input-group">
+        <label>Fields:</label>
+        <input type="text" id="json-fields" value="name,email,phone" />
+      </div>
+      <div class="input-group">
+        <label>Locale:</label>
+        <input type="text" id="json-locale" value="zh-HK" />
+      </div>
+      <div class="input-group">
+        <label>Seed:</label>
+        <input type="text" id="json-seed" value="123" />
+      </div>
       <div class="example">
         Example:
         <a
+          id="json-link"
           href="/json?name=user&fields=name,email,phone&locale=zh-HK&seed=123"
           target="_blank"
         >
-          <code
+          <code id="json-code"
             >/json?name=user&fields=name,email,phone&locale=zh-HK&seed=123</code
           >
         </a>
       </div>
     </div>
+
+    <script>
+      function updateImageUrl() {
+        let keyword = document.getElementById('image-keyword').value
+        let seed = document.getElementById('image-seed').value
+
+        let params = new URLSearchParams()
+        params.set('keyword', keyword)
+        params.set('seed', seed)
+        let url = `/image?${params}`
+
+        document.getElementById('image-link').href = url
+        document.getElementById('image-code').textContent = url
+      }
+
+      function updateJsonUrl() {
+        let name = document.getElementById('json-name').value
+        let fields = document.getElementById('json-fields').value
+        let locale = document.getElementById('json-locale').value
+        let seed = document.getElementById('json-seed').value
+
+        let params = new URLSearchParams()
+        params.set('name', name)
+        params.set('fields', fields)
+        params.set('locale', locale)
+        params.set('seed', seed)
+        let url = `/json?${params}`
+
+        document.getElementById('json-link').href = url
+        document.getElementById('json-code').textContent = url
+      }
+
+      // Add event listeners
+      ;['image-keyword', 'image-seed'].forEach(id => {
+        document.getElementById(id).addEventListener('input', updateImageUrl)
+      })
+      ;['json-name', 'json-fields', 'json-locale', 'json-seed'].forEach(id => {
+        document.getElementById(id).addEventListener('input', updateJsonUrl)
+      })
+    </script>
   </body>
 </html>
