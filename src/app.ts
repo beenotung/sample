@@ -61,8 +61,12 @@ async function main() {
 
   function updateImageUrl() {
     let params = new URLSearchParams()
-    params.set('keyword', previewKeyword.value)
-    params.set('seed', previewSeed.value)
+    if (previewKeyword.value) {
+      params.set('keyword', previewKeyword.value)
+    }
+    if (previewSeed.value) {
+      params.set('seed', previewSeed.value)
+    }
     let url = `/image?${params}`
 
     previewLink.href = url
@@ -71,10 +75,18 @@ async function main() {
 
   function updateJsonUrl() {
     let params = new URLSearchParams()
-    params.set('name', jsonName.value)
-    params.set('fields', jsonFields.value)
-    params.set('locale', jsonLocale.value)
-    params.set('seed', jsonSeed.value)
+    if (jsonName.value) {
+      params.set('name', jsonName.value)
+    }
+    if (jsonFields.value) {
+      params.set('fields', jsonFields.value)
+    }
+    if (jsonLocale.value) {
+      params.set('locale', jsonLocale.value)
+    }
+    if (jsonSeed.value) {
+      params.set('seed', jsonSeed.value)
+    }
     let url = `/json?${params}`
 
     jsonLink.href = url
