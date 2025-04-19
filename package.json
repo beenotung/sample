@@ -8,15 +8,26 @@
     "test": "tsc --noEmit",
     "clean": "rimraf dist",
     "build": "rimraf dist && tsc -p . && rimraf dist/tsconfig.tsbuildinfo",
-    "tsc": "tsc -p ."
+    "tsc": "tsc -p .",
+    "db:ui": "erd-ui erd.txt",
+    "db:setup": "npm run db:migrate",
+    "db:dev": "run-s db:migrate db:plan db:update",
+    "db:migrate": "knex migrate:latest",
+    "db:plan": "auto-migrate db.sqlite3 < erd.txt",
+    "db:rename": "auto-migrate --rename db.sqlite3 < erd.txt",
+    "db:update": "run-s db:migrate db:gen-proxy",
+    "db:gen-proxy": "erd-to-proxy < erd.txt > src/proxy.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.1",
+    "@types/integer": "^4.0.3",
     "@types/node": "^22.14.1",
+    "npm-run-all": "^4.1.5",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
@@ -27,14 +38,22 @@
     "dist"
   ],
   "dependencies": {
+    "better-sqlite3": "^11.9.1",
+    "better-sqlite3-proxy": "^2.10.1",
+    "better-sqlite3-schema": "^3.1.7",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "http-status": "^2.1.0",
+    "knex": "^3.1.0",
     "listening-on": "^2.0.9",
-    "populate-env": "^2.4.3"
+    "media-search": "^1.0.2",
+    "populate-env": "^2.4.3",
+    "quick-erd": "^4.27.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "better-sqlite3"
     ]
   }
 }

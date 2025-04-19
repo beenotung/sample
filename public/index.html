@@ -4,8 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sample API</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 50rem;
+        margin: 0 auto;
+        padding: 1.25rem;
+        line-height: 1.5;
+      }
+      code {
+        display: inline-block;
+        background-color: #f0f0f0;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.25rem;
+        margin: 0.5rem 0;
+        font-size: 1rem;
+      }
+      .example {
+        margin-top: 0.5rem;
+      }
+      .example code {
+        padding: 0.25rem 0.5rem;
+      }
+    </style>
   </head>
   <body>
-    <h1>Sample API</h1>
+    <h1>Sample Data Service</h1>
+    <p>Generate data for placeholders, testing, or database seeding.</p>
+    <p>
+      All APIs support seed parameter to indicate when stable results are
+      needed.
+    </p>
+
+    <div class="api-section">
+      <h2>Image API</h2>
+      <code>/image?keyword=...</code>
+      <p>
+        This API searches online for images matching your keyword and redirects
+        to a result. Results are cached to help provide more stable responses
+        when using the seed parameter.
+      </p>
+      <div class="example">
+        Example:
+        <a href="/image?keyword=cat&seed=123" target="_blank"
+          ><code>/image?keyword=cat&seed=123</code></a
+        >
+      </div>
+    </div>
+
+    <div class="api-section">
+      <h2>JSON API (Coming Soon)</h2>
+      <code>/json?name=...&fields=...&locale=...</code>
+      <p>
+        This API returns structured data in JSON format with locale-aware
+        values.
+      </p>
+      <div class="example">
+        Example:
+        <a
+          href="/json?name=user&fields=name,email,phone&locale=zh-HK&seed=123"
+          target="_blank"
+        >
+          <code
+            >/json?name=user&fields=name,email,phone&locale=zh-HK&seed=123</code
+          >
+        </a>
+      </div>
+    </div>
   </body>
 </html>

@@ -8,3 +8,10 @@ dist/
 .env
 *.tgz
 .DS_Store
+.env.*
+!.env.example
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+dump.sql
+*.xz
