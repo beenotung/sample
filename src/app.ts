@@ -22,6 +22,7 @@ async function main() {
   let jsonCode = querySelector<HTMLElement>('#jsonCode')
   let jsonName = querySelector<HTMLInputElement>('#jsonName')
   let jsonFields = querySelector<HTMLInputElement>('#jsonFields')
+  let jsonCount = querySelector<HTMLInputElement>('#jsonCount')
   let jsonLocale = querySelector<HTMLInputElement>('#jsonLocale')
   let jsonSeed = querySelector<HTMLInputElement>('#jsonSeed')
 
@@ -82,6 +83,9 @@ async function main() {
     }
     if (jsonFields.value) {
       params.set('fields', jsonFields.value)
+    }
+    if (jsonCount.value) {
+      params.set('count', jsonCount.value)
     }
     if (jsonLocale.value) {
       params.set('locale', jsonLocale.value)

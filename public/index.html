@@ -137,7 +137,8 @@
       <code>/json?name=...&fields=...&locale=...</code>
       <p>
         This API returns structured data in JSON format with locale-aware
-        values.
+        values. When count is specified, returns an array of objects, otherwise
+        returns a single object.
       </p>
       <div class="example">
         Example:
@@ -150,6 +151,16 @@
       <div class="input-group">
         <label>Fields:</label>
         <input type="text" id="jsonFields" placeholder="Default: 'id,name'" />
+      </div>
+      <div class="input-group">
+        <label>Count:</label>
+        <input
+          type="number"
+          id="jsonCount"
+          placeholder="Leave blank for single object"
+          min="0"
+          max="100"
+        />
       </div>
       <div class="input-group">
         <label>Locale:</label>
