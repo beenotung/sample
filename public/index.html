@@ -58,17 +58,23 @@
       </p>
       <div class="example">
         Example:
-        <a id="image-link" href="/image?keyword=cat&seed=123" target="_blank"
-          ><code id="image-code">/image?keyword=cat&seed=123</code></a
-        >
+        <a id="image-link" target="_blank"><code id="image-code"></code></a>
       </div>
       <div class="input-group">
         <label>Keyword:</label>
-        <input type="text" id="image-keyword" value="cat" />
+        <input
+          type="text"
+          id="image-keyword"
+          placeholder="Leave blank for general image"
+        />
       </div>
       <div class="input-group">
         <label>Seed:</label>
-        <input type="text" id="image-seed" value="123" />
+        <input
+          type="text"
+          id="image-seed"
+          placeholder="Leave blank for random"
+        />
       </div>
     </div>
 
@@ -89,22 +95,19 @@
       </div>
       <div class="input-group">
         <label>Locale:</label>
-        <input type="text" id="json-locale" value="zh-HK" />
+        <input
+          type="text"
+          id="json-locale"
+          placeholder="Default: 'en'"
+        />
       </div>
       <div class="input-group">
         <label>Seed:</label>
-        <input type="text" id="json-seed" value="123" />
+        <input type="text" id="json-seed" placeholder="Leave blank for random" />
       </div>
       <div class="example">
         Example:
-        <a
-          id="json-link"
-          href="/json?name=user&fields=name,email,phone&locale=zh-HK&seed=123"
-          target="_blank"
-        >
-          <code id="json-code"
-            >/json?name=user&fields=name,email,phone&locale=zh-HK&seed=123</code
-          >
+        <a id="json-link" target="_blank"><code id="json-code"></code></a>
         </a>
       </div>
     </div>
@@ -147,6 +150,10 @@
       ;['json-name', 'json-fields', 'json-locale', 'json-seed'].forEach(id => {
         document.getElementById(id).addEventListener('input', updateJsonUrl)
       })
+
+      // Update example links
+      updateImageUrl()
+      updateJsonUrl()
     </script>
   </body>
 </html>
