@@ -7,6 +7,7 @@ function querySelector<T extends Element>(selector: string): T {
 }
 
 async function main() {
+  let imageAPIContainer = querySelector<HTMLElement>('#imageAPIContainer')
   let previewContainer = querySelector<HTMLElement>('.preview')
   let previewImg = querySelector<HTMLImageElement>('#imagePreview')
   let previewUrlCode = querySelector<HTMLElement>('#imageUrlCode')
@@ -16,6 +17,7 @@ async function main() {
   let previewKeyword = querySelector<HTMLInputElement>('#imageKeyword')
   let previewSeed = querySelector<HTMLInputElement>('#imageSeed')
 
+  let jsonAPIContainer = querySelector<HTMLElement>('#jsonAPIContainer')
   let jsonLink = querySelector<HTMLAnchorElement>('#jsonLink')
   let jsonCode = querySelector<HTMLElement>('#jsonCode')
   let jsonName = querySelector<HTMLInputElement>('#jsonName')
@@ -94,21 +96,17 @@ async function main() {
   }
 
   // Event listeners
-  ;[previewKeyword, previewSeed].forEach(input => {
-    input.addEventListener('input', updateImageUrl)
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        updateImagePreview()
-      }
-    })
+  imageAPIContainer.addEventListener('input', updateImageUrl)
+  imageAPIContainer.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      updateImagePreview()
+    }
   })
-  ;[jsonName, jsonFields, jsonLocale, jsonSeed].forEach(input => {
-    input.addEventListener('input', updateJsonUrl)
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        jsonLink.click()
-      }
-    })
+  jsonAPIContainer.addEventListener('input', updateJsonUrl)
+  jsonAPIContainer.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      jsonLink.click()
+    }
   })
 
   // Initial updates
