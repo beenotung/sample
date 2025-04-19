@@ -1,4 +1,5 @@
 import { createHash } from 'crypto'
+import { hasUncaughtExceptionCaptureCallback } from 'process'
 
 export function hashString(keyword: string) {
   let hash = createHash('md5')
@@ -12,15 +13,11 @@ export function hashNumber(number: number) {
 }
 
 export function matchImageByHash(seed_hash: number, image_ids: number[]) {
-  let acc_diff = Number.MAX_SAFE_INTEGER
-  let acc_image_id = 0
-  for (let image_id of image_ids) {
-    let id_hash = hashNumber(image_id)
-    let diff = Math.abs(seed_hash - id_hash)
-    if (diff < acc_diff) {
-      acc_diff = diff
-      acc_image_id = image_id
-    }
-  }
-  return acc_image_id
+  return image_ids
+    .map(image_id => {
+      let id_hash = hashNumber(image_id)
+      let diff = Math.abs(seed_hash - id_hash)
+      return { image_id, diff }
+    })
+    .sort((a, b) => a.diff - b.diff)
 }

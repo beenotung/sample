@@ -27,6 +27,7 @@ id integer PK
 url text
 width integer
 height integer
+disable_time integer NULL
 
 
 image_keyword
@@ -34,6 +35,7 @@ image_keyword
 id integer PK
 image_id integer FK >0- image.id
 keyword_id integer FK >0- keyword.id
+disable_time integer NULL
 
 
 # zoom: 1.000
@@ -44,6 +46,6 @@ keyword_id integer FK >0- keyword.id
 # diagram-text: #000000
 # table-bg: #ffffff
 # table-text: #000000
-# keyword (718, 99)
-# image (65, 125)
-# image_keyword (375, 225)
+# keyword (787, 93)
+# image (64, 105)
+# image_keyword (420, 216)

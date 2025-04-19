@@ -2,7 +2,6 @@ import { pick, seedRow } from 'better-sqlite3-proxy'
 import { proxy } from './proxy'
 import { ImageSearchResult } from 'media-search'
 import { db } from './db'
-import { Statement } from 'better-sqlite3'
 
 // keyword -> id
 let keyword_cache = new Map<string, number>()
@@ -59,11 +58,47 @@ let select_image_by_keyword = db
     /* sql */ `
 select image_id
 from image_keyword
+inner join image on image_keyword.image_id = image.id
 where keyword_id = :keyword_id
+  and image.disable_time is null
+  and image_keyword.disable_time is null
 `,
   )
   .pluck()
 
 export function matchImageByKeyword(input: { keyword_id: number }) {
   return select_image_by_keyword.all(input)
+}
+
+let select_image_status = db
+  .prepare<{ image_id: number }, number>(
+    /* sql */ `
+select count(image.id) as count
+from image
+inner join image_keyword on image.id = image_keyword.image_id
+where image.id = :image_id
+  and image_keyword.keyword_id = :keyword_id
+  and image.disable_time is null
+  and image_keyword.disable_time is null
+`,
+  )
+  .pluck()
+
+export function isImageDisabled(input: {
+  image_id: number
+  keyword_id: number
+}) {
+  let status = select_image_status.get(input)
+  return status == 0
+}
+
+let disable_image = db.prepare<{ image_id: number; now: number }>(/* sql */ `
+update image set disable_time = :now where id = :image_id
+`)
+
+export function disableImage(input: { image_id: number }) {
+  disable_image.run({
+    image_id: input.image_id,
+    now: Date.now(),
+  })
 }

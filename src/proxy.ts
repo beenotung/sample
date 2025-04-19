@@ -11,6 +11,7 @@ export type Image = {
   url: string
   width: number
   height: number
+  disable_time: null | number
 }
 
 export type ImageKeyword = {
@@ -19,6 +20,7 @@ export type ImageKeyword = {
   image?: Image
   keyword_id: number
   keyword?: Keyword
+  disable_time: null | number
 }
 
 export type DBProxy = {

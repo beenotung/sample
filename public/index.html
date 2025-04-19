@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sample API</title>
+    <title>Sample Data API</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -38,17 +38,63 @@
         border: 1px solid #ccc;
         border-radius: 0.25rem;
       }
+      .preview {
+        margin: 1rem 0;
+        text-align: center;
+      }
+      .preview img {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 0.5rem;
+        display: none;
+      }
+      .preview.loaded img {
+        display: inline-block;
+      }
+      .preview .loading {
+        color: #666;
+        display: none;
+      }
+      .preview.loading .loading {
+        display: block;
+      }
+      .preview .image-url {
+        margin-bottom: 1rem;
+        word-break: break-all;
+      }
+      .preview .image-url code {
+        font-size: 0.9rem;
+        background-color: #f0f0f0;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        display: inline;
+        margin: 0;
+      }
+      .preview .error {
+        color: #d32f2f;
+        display: none;
+        padding: 1rem;
+        background: #ffebee;
+        border-radius: 0.25rem;
+        margin: 1rem 0;
+      }
+      .preview.error .error {
+        display: block;
+      }
+      .preview.error .loading {
+        display: none;
+      }
     </style>
   </head>
   <body>
-    <h1>Sample Data Service</h1>
+    <h1>Sample Data API</h1>
     <p>Generate data for placeholders, testing, or database seeding.</p>
     <p>
       All APIs support seed parameter to indicate when stable results are
       needed.
     </p>
 
-    <div class="api-section">
+    <div class="api-section" id="imageApi">
       <h2>Image API</h2>
       <code>/image?keyword=...</code>
       <p>
@@ -58,13 +104,13 @@
       </p>
       <div class="example">
         Example:
-        <a id="image-link" target="_blank"><code id="image-code"></code></a>
+        <a id="imageLink" target="_blank"><code id="imageCode"></code></a>
       </div>
       <div class="input-group">
         <label>Keyword:</label>
         <input
           type="text"
-          id="image-keyword"
+          id="imageKeyword"
           placeholder="Leave blank for general image"
         />
       </div>
@@ -72,88 +118,49 @@
         <label>Seed:</label>
         <input
           type="text"
-          id="image-seed"
+          id="imageSeed"
           placeholder="Leave blank for random"
         />
       </div>
+      <div class="preview">
+        <div class="image-url">
+          <h3>Resolved Image URL</h3>
+          <code id="imageUrlCode"></code>
+        </div>
+        <img id="imagePreview" alt="Preview" />
+        <div id="imageError" class="error"></div>
+      </div>
     </div>
 
-    <div class="api-section">
+    <div class="api-section" id="jsonApi">
       <h2>JSON API (Coming Soon)</h2>
       <code>/json?name=...&fields=...&locale=...</code>
       <p>
         This API returns structured data in JSON format with locale-aware
         values.
       </p>
+      <div class="example">
+        Example:
+        <a id="jsonLink" target="_blank"><code id="jsonCode"></code></a>
+      </div>
       <div class="input-group">
         <label>Name:</label>
-        <input type="text" id="json-name" value="user" />
+        <input type="text" id="jsonName" value="user" />
       </div>
       <div class="input-group">
         <label>Fields:</label>
-        <input type="text" id="json-fields" value="name,email,phone" />
+        <input type="text" id="jsonFields" value="name,email,phone" />
       </div>
       <div class="input-group">
         <label>Locale:</label>
-        <input
-          type="text"
-          id="json-locale"
-          placeholder="Default: 'en'"
-        />
+        <input type="text" id="jsonLocale" placeholder="Default: 'en'" />
       </div>
       <div class="input-group">
         <label>Seed:</label>
-        <input type="text" id="json-seed" placeholder="Leave blank for random" />
-      </div>
-      <div class="example">
-        Example:
-        <a id="json-link" target="_blank"><code id="json-code"></code></a>
-        </a>
+        <input type="text" id="jsonSeed" placeholder="Leave blank for random" />
       </div>
     </div>
 
-    <script>
-      function updateImageUrl() {
-        let keyword = document.getElementById('image-keyword').value
-        let seed = document.getElementById('image-seed').value
-
-        let params = new URLSearchParams()
-        params.set('keyword', keyword)
-        params.set('seed', seed)
-        let url = `/image?${params}`
-
-        document.getElementById('image-link').href = url
-        document.getElementById('image-code').textContent = url
-      }
-
-      function updateJsonUrl() {
-        let name = document.getElementById('json-name').value
-        let fields = document.getElementById('json-fields').value
-        let locale = document.getElementById('json-locale').value
-        let seed = document.getElementById('json-seed').value
-
-        let params = new URLSearchParams()
-        params.set('name', name)
-        params.set('fields', fields)
-        params.set('locale', locale)
-        params.set('seed', seed)
-        let url = `/json?${params}`
-
-        document.getElementById('json-link').href = url
-        document.getElementById('json-code').textContent = url
-      }
-
-      // Add event listeners
-      ;['image-keyword', 'image-seed'].forEach(id => {
-        document.getElementById(id).addEventListener('input', updateImageUrl)
-      })
-      ;['json-name', 'json-fields', 'json-locale', 'json-seed'].forEach(id => {
-        document.getElementById(id).addEventListener('input', updateJsonUrl)
-      })
-
-      // Update example links
-      updateImageUrl()
-      updateJsonUrl()
-    </script>
+    <script src="bundle.js"></script>
   </body>
 </html>
