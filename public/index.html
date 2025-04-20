@@ -148,6 +148,13 @@
         margin: 0;
         color: #2962ff;
       }
+      .base-url a {
+        text-decoration: none;
+      }
+      .base-url a:hover code {
+        background: #e3f2fd;
+        color: #1565c0;
+      }
     </style>
   </head>
   <body>
@@ -175,7 +182,12 @@
         All APIs support seed parameter to indicate when stable results are
         needed.
       </p>
-      <p class="base-url">Base URL: <code>https://sample.hkit.cc</code></p>
+      <p class="base-url">
+        Base URL:
+        <a href="https://sample.hkit.cc" target="_blank"
+          ><code>https://sample.hkit.cc</code></a
+        >
+      </p>
 
       <div class="api-section" id="imageAPIContainer">
         <h2>GET <code>/image</code> API</h2>
