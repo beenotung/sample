@@ -204,6 +204,7 @@
               type="text"
               id="imageKeyword"
               placeholder="Leave blank for general image"
+              value="cat"
             />
           </div>
           <div class="input-group">
@@ -241,18 +242,19 @@
 
         <div class="example">
           <h3>Example URL</h3>
-          <a id="jsonLink" target="_blank"
-            ><code id="jsonCode"
-              >/json?name=users&fields=id+name+title&count=10&locale=zh-HK</code
-            ></a
-          >
+          <a id="jsonLink" target="_blank"><code id="jsonCode">/json</code></a>
         </div>
 
         <div class="api-form">
           <h3>Parameters</h3>
           <div class="input-group">
             <label>Name:</label>
-            <input type="text" id="jsonName" placeholder="Default: 'user'" />
+            <input
+              type="text"
+              id="jsonName"
+              placeholder="Default: 'user'"
+              value="users"
+            />
           </div>
           <div class="input-group">
             <label>Fields:</label>
@@ -260,6 +262,7 @@
               type="text"
               id="jsonFields"
               placeholder="Default: 'id,name'"
+              value="id name title"
             />
           </div>
           <div class="input-group">
@@ -270,11 +273,17 @@
               placeholder="Leave blank for single object"
               min="0"
               max="100"
+              value="10"
             />
           </div>
           <div class="input-group">
             <label>Locale:</label>
-            <input type="text" id="jsonLocale" placeholder="Default: 'en'" />
+            <input
+              type="text"
+              id="jsonLocale"
+              placeholder="Default: 'en'"
+              value="zh-HK"
+            />
           </div>
           <div class="input-group">
             <label>Seed:</label>

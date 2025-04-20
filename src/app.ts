@@ -114,11 +114,11 @@ async function main() {
   })
 
   // Initial updates
-  // updateImageUrl()
-  // updateImagePreview()
-  // updateJsonUrl()
-  imageLink.href = imageCode.textContent!
-  jsonLink.href = jsonCode.textContent!
+  updateImageUrl()
+  updateImagePreview()
+  updateJsonUrl()
+  // imageLink.href = imageCode.textContent!
+  // jsonLink.href = jsonCode.textContent!
 }
 
 main().catch(e => {
