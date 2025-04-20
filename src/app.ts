@@ -85,7 +85,7 @@ async function main() {
     let url = `/image?${params}`
 
     imageLink.href = url
-    imageCode.textContent = url
+    imageCode.textContent = window.origin + url
   }
 
   function updateJsonUrl() {
@@ -108,7 +108,7 @@ async function main() {
     let url = `/json?${params}`
 
     jsonLink.href = url
-    jsonCode.textContent = url
+    jsonCode.textContent = window.origin + url
   }
 
   // Event listeners
