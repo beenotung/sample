@@ -8,14 +8,14 @@ function querySelector<T extends Element>(selector: string): T {
 
 async function main() {
   let imageAPIContainer = querySelector<HTMLElement>('#imageAPIContainer')
-  let previewContainer = querySelector<HTMLElement>('.preview')
-  let previewImg = querySelector<HTMLImageElement>('#imagePreview')
-  let previewUrlCode = querySelector<HTMLElement>('#imageUrlCode')
-  let previewError = querySelector<HTMLElement>('#imageError')
-  let previewLink = querySelector<HTMLAnchorElement>('#imageLink')
-  let previewCode = querySelector<HTMLElement>('#imageCode')
-  let previewKeyword = querySelector<HTMLInputElement>('#imageKeyword')
-  let previewSeed = querySelector<HTMLInputElement>('#imageSeed')
+  let imageContainer = querySelector<HTMLElement>('.image-result')
+  let previewImg = querySelector<HTMLImageElement>('#previewImg')
+  let imageUrlCode = querySelector<HTMLElement>('#imageUrlCode')
+  let previewError = querySelector<HTMLElement>('#previewError')
+  let imageLink = querySelector<HTMLAnchorElement>('#imageLink')
+  let imageCode = querySelector<HTMLElement>('#imageCode')
+  let imageKeyword = querySelector<HTMLInputElement>('#imageKeyword')
+  let imageSeed = querySelector<HTMLInputElement>('#imageSeed')
 
   let jsonAPIContainer = querySelector<HTMLElement>('#jsonAPIContainer')
   let jsonLink = querySelector<HTMLAnchorElement>('#jsonLink')
@@ -27,10 +27,10 @@ async function main() {
   let jsonSeed = querySelector<HTMLInputElement>('#jsonSeed')
 
   async function updateImagePreview() {
-    let url = previewLink.href
+    let url = imageLink.href
 
-    previewContainer.classList.remove('loaded', 'error')
-    previewContainer.classList.add('loading')
+    imageContainer.classList.remove('loaded', 'error')
+    imageContainer.classList.add('loading')
     previewError.textContent = ''
     previewImg.onload = null
     previewImg.onerror = null
@@ -43,37 +43,37 @@ async function main() {
       }
 
       let imageUrl = response.url
-      previewUrlCode.textContent = imageUrl
+      imageUrlCode.textContent = imageUrl
       previewImg.src = imageUrl
 
       previewImg.onload = () => {
-        previewContainer.classList.remove('loading', 'error')
-        previewContainer.classList.add('loaded')
+        imageContainer.classList.remove('loading', 'error')
+        imageContainer.classList.add('loaded')
       }
       previewImg.onerror = () => {
-        previewContainer.classList.remove('loading', 'loaded')
-        previewContainer.classList.add('error')
+        imageContainer.classList.remove('loading', 'loaded')
+        imageContainer.classList.add('error')
         previewError.textContent = 'Failed to load image'
       }
     } catch (error) {
-      previewContainer.classList.remove('loading', 'loaded')
-      previewContainer.classList.add('error')
+      imageContainer.classList.remove('loading', 'loaded')
+      imageContainer.classList.add('error')
       previewError.textContent = String(error)
     }
   }
 
   function updateImageUrl() {
     let params = new URLSearchParams()
-    if (previewKeyword.value) {
-      params.set('keyword', previewKeyword.value)
+    if (imageKeyword.value) {
+      params.set('keyword', imageKeyword.value)
     }
-    if (previewSeed.value) {
-      params.set('seed', previewSeed.value)
+    if (imageSeed.value) {
+      params.set('seed', imageSeed.value)
     }
     let url = `/image?${params}`
 
-    previewLink.href = url
-    previewCode.textContent = url
+    imageLink.href = url
+    imageCode.textContent = url
   }
 
   function updateJsonUrl() {
@@ -114,9 +114,11 @@ async function main() {
   })
 
   // Initial updates
-  updateImageUrl()
-  updateJsonUrl()
-  updateImagePreview()
+  // updateImageUrl()
+  // updateImagePreview()
+  // updateJsonUrl()
+  imageLink.href = imageCode.textContent!
+  jsonLink.href = jsonCode.textContent!
 }
 
 main().catch(e => {

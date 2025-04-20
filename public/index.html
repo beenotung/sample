@@ -18,7 +18,8 @@
         padding: 0.5rem 0.75rem;
         border-radius: 0.25rem;
         margin: 0.5rem 0;
-        font-size: 1rem;
+        font-size: 1em;
+        font-family: 'Courier New', Courier, monospace;
       }
       .example {
         margin-top: 0.5rem;
@@ -38,31 +39,31 @@
         border: 1px solid #ccc;
         border-radius: 0.25rem;
       }
-      .preview {
+      .image-result {
         margin: 1rem 0;
         text-align: center;
       }
-      .preview img {
+      .image-result img {
         max-width: 100%;
         max-height: 300px;
         border-radius: 0.5rem;
         display: none;
       }
-      .preview.loaded img {
+      .image-result.loaded img {
         display: inline-block;
       }
-      .preview .loading {
+      .image-result .loading {
         color: #666;
         display: none;
       }
-      .preview.loading .loading {
+      .image-result.loading .loading {
         display: block;
       }
-      .preview .image-url {
+      .image-result .image-url {
         margin-bottom: 1rem;
         word-break: break-all;
       }
-      .preview .image-url code {
+      .image-result .image-url code {
         font-size: 0.9rem;
         background-color: #f0f0f0;
         padding: 0.25rem 0.5rem;
@@ -70,7 +71,7 @@
         display: inline;
         margin: 0;
       }
-      .preview .error {
+      .image-result .error {
         color: #d32f2f;
         display: none;
         padding: 1rem;
@@ -78,10 +79,10 @@
         border-radius: 0.25rem;
         margin: 1rem 0;
       }
-      .preview.error .error {
+      .image-result.error .error {
         display: block;
       }
-      .preview.error .loading {
+      .image-result.error .loading {
         display: none;
       }
       .note {
@@ -101,89 +102,128 @@
     </p>
 
     <div class="api-section" id="imageAPIContainer">
-      <h2>Image API</h2>
-      <code>/image?keyword=...</code>
-      <p>
-        This API searches online for images matching your keyword and redirects
-        to a result. Results are cached to help provide more stable responses
-        when using the seed parameter.
-      </p>
+      <h2>GET <code>/image</code> API</h2>
+
+      <div class="api-description">
+        <h3>Description</h3>
+        <p>
+          This API searches online for images matching your keyword and
+          redirects to a result. Results are cached to help provide more stable
+          responses when using the seed parameter.
+        </p>
+      </div>
+
       <div class="example">
-        Example:
-        <a id="imageLink" target="_blank"><code id="imageCode"></code></a>
+        <h3>Example URL</h3>
+        <a id="imageLink" target="_blank"
+          ><code id="imageCode">/image?keyword=cat</code></a
+        >
       </div>
-      <div class="input-group">
-        <label>Keyword:</label>
-        <input
-          type="text"
-          id="imageKeyword"
-          placeholder="Leave blank for general image"
-        />
+
+      <div class="api-form">
+        <h3>Parameters</h3>
+        <div class="input-group">
+          <label>Keyword:</label>
+          <input
+            type="text"
+            id="imageKeyword"
+            placeholder="Leave blank for general image"
+          />
+        </div>
+        <div class="input-group">
+          <label>Seed:</label>
+          <input
+            type="text"
+            id="imageSeed"
+            placeholder="Leave blank for random"
+          />
+        </div>
       </div>
-      <div class="input-group">
-        <label>Seed:</label>
-        <input
-          type="text"
-          id="imageSeed"
-          placeholder="Leave blank for random"
-        />
-      </div>
-      <div class="preview">
+
+      <div class="image-result">
+        <h3>Result</h3>
         <div class="image-url">
-          <h3>Resolved Image URL</h3>
+          <h4>Resolved Image URL</h4>
           <code id="imageUrlCode"></code>
         </div>
-        <img id="imagePreview" alt="Preview" />
-        <div id="imageError" class="error"></div>
+        <img id="previewImg" alt="Preview" />
+        <div id="previewError" class="error"></div>
       </div>
     </div>
 
     <div class="api-section" id="jsonAPIContainer">
-      <h2>JSON API</h2>
-      <code>/json?name=...&fields=...&locale=...</code>
-      <p>
-        This API returns structured data in JSON format with locale-aware
-        values. When count is specified, returns an array of objects, otherwise
-        returns a single object.
-      </p>
-      <p class="note">
-        Currently using Faker.js for data generation. In the future, this will
-        be enhanced with AI-powered data generation for more context-aware and
-        realistic content.
-      </p>
-      <p class="hint">
-        Fields can be separated by comma, plus sign, or space, e.g.
-        <code>id,name</code> or <code>id+name</code> or <code>id name</code>
-      </p>
+      <h2>GET <code>/json</code> API</h2>
+
+      <div class="api-description">
+        <h3>Description</h3>
+        <p>
+          This API returns structured data in JSON format with locale-aware
+          values. When count is specified, returns an array of objects,
+          otherwise returns a single object.
+        </p>
+      </div>
+
       <div class="example">
-        Example:
-        <a id="jsonLink" target="_blank"><code id="jsonCode"></code></a>
+        <h3>Example URL</h3>
+        <a id="jsonLink" target="_blank"
+          ><code id="jsonCode"
+            >/json?name=users&fields=id+name+title&count=10&locale=zh-HK</code
+          ></a
+        >
       </div>
-      <div class="input-group">
-        <label>Name:</label>
-        <input type="text" id="jsonName" placeholder="Default: 'user'" />
+
+      <div class="api-form">
+        <h3>Parameters</h3>
+        <div class="input-group">
+          <label>Name:</label>
+          <input type="text" id="jsonName" placeholder="Default: 'user'" />
+        </div>
+        <div class="input-group">
+          <label>Fields:</label>
+          <input type="text" id="jsonFields" placeholder="Default: 'id,name'" />
+        </div>
+        <div class="input-group">
+          <label>Count:</label>
+          <input
+            type="number"
+            id="jsonCount"
+            placeholder="Leave blank for single object"
+            min="0"
+            max="100"
+          />
+        </div>
+        <div class="input-group">
+          <label>Locale:</label>
+          <input type="text" id="jsonLocale" placeholder="Default: 'en'" />
+        </div>
+        <div class="input-group">
+          <label>Seed:</label>
+          <input
+            type="text"
+            id="jsonSeed"
+            placeholder="Leave blank for random"
+          />
+        </div>
       </div>
-      <div class="input-group">
-        <label>Fields:</label>
-        <input type="text" id="jsonFields" placeholder="Default: 'id,name'" />
-      </div>
-      <div class="input-group">
-        <label>Count:</label>
-        <input
-          type="number"
-          id="jsonCount"
-          placeholder="Leave blank for single object"
-          min="0"
-          max="100"
-        />
-      </div>
-      <div class="input-group">
-        <label>Locale:</label>
-        <input type="text" id="jsonLocale" placeholder="Default: 'en'" />
-      </div>
-      <div class="input-group">
-        <label>Seed:</label>
-        <input type="text" id="jsonSeed" placeholder="Leave blank for random" />
+
+      <div class="api-notes">
+        <h3>Notes</h3>
+        <ul>
+          <li>
+            <strong>Field Separators:</strong> Fields can be separated by comma,
+            plus sign, or space, e.g. <code>id,name</code> or
+            <code>id+name</code> or <code>id name</code>
+          </li>
+          <li>
+            <strong>Data Generation:</strong> Currently using Faker.js. Will be
+            enhanced with AI-powered generation for more context-aware and
+            realistic content.
+          </li>
+          <li>
+            <strong>AI Guidance:</strong> Use remark parameter to guide AI
+            generation (coming soon)
+          </li>
+        </ul>
       </div>
     </div>
 
