@@ -31,6 +31,20 @@ imageRouter.get('/', async (req, res) => {
       return
     }
 
+    let width = Number(req.query.w) || 0
+    if (isNaN(width) || width < 0) {
+      res.status(400)
+      res.json({ error: 'width must be a positive number' })
+      return
+    }
+
+    let height = Number(req.query.h) || 0
+    if (isNaN(height) || height < 0) {
+      res.status(400)
+      res.json({ error: 'height must be a positive number' })
+      return
+    }
+
     let seed_hash = hashString(seed)
 
     // Check local database first
@@ -71,7 +85,7 @@ imageRouter.get('/', async (req, res) => {
         continue
       }
       let url = getImageUrl(image_id)
-      return res.redirect(proxyImageUrl(url))
+      return res.redirect(proxyImageUrl(url, { width, height }))
     }
 
     res.status(404)

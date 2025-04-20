@@ -16,6 +16,8 @@ async function main() {
   let imageCode = querySelector<HTMLElement>('#imageCode')
   let imageKeyword = querySelector<HTMLInputElement>('#imageKeyword')
   let imageSeed = querySelector<HTMLInputElement>('#imageSeed')
+  let imageWidth = querySelector<HTMLInputElement>('#imageWidth')
+  let imageHeight = querySelector<HTMLInputElement>('#imageHeight')
 
   let jsonAPIContainer = querySelector<HTMLElement>('#jsonAPIContainer')
   let jsonLink = querySelector<HTMLAnchorElement>('#jsonLink')
@@ -66,6 +68,12 @@ async function main() {
     let params = new URLSearchParams()
     if (imageKeyword.value) {
       params.set('keyword', imageKeyword.value)
+    }
+    if (imageWidth.value) {
+      params.set('w', imageWidth.value)
+    }
+    if (imageHeight.value) {
+      params.set('h', imageHeight.value)
     }
     if (imageSeed.value) {
       params.set('seed', imageSeed.value)
