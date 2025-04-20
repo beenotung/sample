@@ -23,6 +23,7 @@ npm run build
 
 rsync -SavLP \
   package.json \
+	public \
 	dist \
 	"$server:${project_dir}"
 
