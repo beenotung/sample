@@ -52,13 +52,6 @@
       .image-result.loaded img {
         display: inline-block;
       }
-      .image-result .loading {
-        color: #666;
-        display: none;
-      }
-      .image-result.loading .loading {
-        display: block;
-      }
       .image-result .image-url {
         margin-bottom: 1rem;
         word-break: break-all;
@@ -82,14 +75,19 @@
       .image-result.error .error {
         display: block;
       }
-      .image-result.error .loading {
-        display: none;
-      }
       .note {
         color: #666;
         font-size: 0.9rem;
         font-style: italic;
         margin-top: 0.5rem;
+      }
+      .note a {
+        color: #666;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+      }
+      .note a:hover {
+        color: #333;
       }
       header {
         margin-bottom: 2rem;
@@ -155,6 +153,16 @@
         background: #e3f2fd;
         color: #1565c0;
       }
+      .image-result .loading {
+        color: #666;
+        display: none;
+      }
+      .image-result.loading .loading {
+        display: block;
+      }
+      .image-result.error .loading {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -196,8 +204,9 @@
           <h3>Description</h3>
           <p>
             This API searches online for images matching your keyword and
-            redirects to a result. Results are cached to help provide more
-            stable responses when using the seed parameter.
+            redirects to a result. Results are cached for stable responses.
+            Powered by
+            <a href="https://images.weserv.nl/" target="_blank">wsrv.nl</a>.
           </p>
         </div>
 
@@ -253,6 +262,7 @@
             <h4>Resolved Image URL</h4>
             <code id="imageUrlCode"></code>
           </div>
+          <div class="loading">Loading image...</div>
           <img id="previewImg" alt="Preview" />
           <div id="previewError" class="error"></div>
         </div>
@@ -265,8 +275,13 @@
           <h3>Description</h3>
           <p>
             This API returns structured data in JSON format with locale-aware
-            values. When count is specified, returns an array of objects,
-            otherwise returns a single object.
+            values. Returns array when count specified, otherwise single object.
+          </p>
+          <p class="note">
+            Currently using
+            <a href="https://fakerjs.dev/" target="_blank">Faker.js</a>, will be
+            enhanced with AI-powered generation. Use remark parameter to guide
+            AI generation (coming soon).
           </p>
         </div>
 
@@ -329,18 +344,10 @@
           <h3>Notes</h3>
           <ul>
             <li>
-              <strong>Field Separators:</strong> Fields can be separated by
-              comma, plus sign, or space, e.g. <code>id,name</code> or
-              <code>id+name</code> or <code>id name</code>
-            </li>
-            <li>
-              <strong>Data Generation:</strong> Currently using Faker.js. Will
-              be enhanced with AI-powered generation for more context-aware and
-              realistic content.
-            </li>
-            <li>
-              <strong>AI Guidance:</strong> Use remark parameter to guide AI
-              generation (coming soon)
+              <strong>Field Separators:</strong> Use comma, plus, or space.
+              <br />
+              e.g. <code>id,name</code> or <code>id+name</code> or
+              <code>id name</code>
             </li>
           </ul>
         </div>

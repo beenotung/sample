@@ -31,12 +31,20 @@ async function main() {
   async function updateImagePreview() {
     let url = imageLink.href
 
+    // Show loading state before fetch
     imageContainer.classList.remove('loaded', 'error')
     imageContainer.classList.add('loading')
     previewError.textContent = ''
     previewImg.onload = null
     previewImg.onerror = null
     previewImg.src = ''
+    imageUrlCode.textContent = window.origin + url
+
+    function showImagePreviewError(message: string) {
+      imageContainer.classList.remove('loading', 'loaded')
+      imageContainer.classList.add('error')
+      previewError.textContent = message
+    }
 
     try {
       let response = await fetch(url)
@@ -53,14 +61,10 @@ async function main() {
         imageContainer.classList.add('loaded')
       }
       previewImg.onerror = () => {
-        imageContainer.classList.remove('loading', 'loaded')
-        imageContainer.classList.add('error')
-        previewError.textContent = 'Failed to load image'
+        showImagePreviewError('Failed to load image')
       }
     } catch (error) {
-      imageContainer.classList.remove('loading', 'loaded')
-      imageContainer.classList.add('error')
-      previewError.textContent = String(error)
+      showImagePreviewError(String(error))
     }
   }
 
