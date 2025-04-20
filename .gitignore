@@ -16,3 +16,4 @@ dist/
 dump.sql
 *.xz
 public/bundle.js
+scripts/config

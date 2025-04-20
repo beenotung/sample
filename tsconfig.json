@@ -7,10 +7,8 @@
     "strict": true,
     "skipLibCheck": true,
     "incremental": true,
-    "declaration": true,
+    "declaration": false,
     "outDir": "dist"
   },
-  "exclude": [
-    "dist"
-  ]
+  "exclude": ["dist"]
 }
