@@ -84,6 +84,12 @@
       .preview.error .loading {
         display: none;
       }
+      .note {
+        color: #666;
+        font-size: 0.9rem;
+        font-style: italic;
+        margin-top: 0.5rem;
+      }
     </style>
   </head>
   <body>
@@ -133,12 +139,21 @@
     </div>
 
     <div class="api-section" id="jsonAPIContainer">
-      <h2>JSON API (Coming Soon)</h2>
+      <h2>JSON API</h2>
       <code>/json?name=...&fields=...&locale=...</code>
       <p>
         This API returns structured data in JSON format with locale-aware
         values. When count is specified, returns an array of objects, otherwise
         returns a single object.
+      </p>
+      <p class="note">
+        Currently using Faker.js for data generation. In the future, this will
+        be enhanced with AI-powered data generation for more context-aware and
+        realistic content.
+      </p>
+      <p class="hint">
+        Fields can be separated by comma, plus sign, or space, e.g.
+        <code>id,name</code> or <code>id+name</code> or <code>id name</code>
       </p>
       <div class="example">
         Example:
