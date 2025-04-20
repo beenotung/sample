@@ -91,141 +91,224 @@
         font-style: italic;
         margin-top: 0.5rem;
       }
+      header {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 1rem;
+      }
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .header-content h1 {
+        margin: 0;
+      }
+      .github-link {
+        color: #333;
+        text-decoration: none;
+      }
+      .github-link:hover {
+        color: #666;
+      }
+      main {
+        min-height: calc(100vh - 200px);
+      }
+      footer {
+        margin-top: 3rem;
+        padding: 1rem 0;
+        text-align: center;
+        color: #666;
+        border-top: 1px solid #eee;
+      }
+      .heart {
+        display: inline-block;
+        animation: pulse 1.5s ease infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .base-url {
+        margin: 1.5rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 0.25rem;
+        border: 1px solid #eee;
+        width: fit-content;
+      }
+      .base-url code {
+        margin: 0;
+        color: #2962ff;
+      }
     </style>
   </head>
   <body>
-    <h1>Sample Data API</h1>
-    <p>Generate data for placeholders, testing, or database seeding.</p>
-    <p>
-      All APIs support seed parameter to indicate when stable results are
-      needed.
-    </p>
-
-    <div class="api-section" id="imageAPIContainer">
-      <h2>GET <code>/image</code> API</h2>
-
-      <div class="api-description">
-        <h3>Description</h3>
-        <p>
-          This API searches online for images matching your keyword and
-          redirects to a result. Results are cached to help provide more stable
-          responses when using the seed parameter.
-        </p>
-      </div>
-
-      <div class="example">
-        <h3>Example URL</h3>
-        <a id="imageLink" target="_blank"
-          ><code id="imageCode">/image?keyword=cat</code></a
+    <header>
+      <div class="header-content">
+        <h1>Sample Data API</h1>
+        <a
+          href="https://github.com/beenotung/sample"
+          class="github-link"
+          target="_blank"
         >
+          <svg height="24" viewBox="0 0 16 16" width="24">
+            <path
+              fill="currentColor"
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+            ></path>
+          </svg>
+        </a>
       </div>
+    </header>
 
-      <div class="api-form">
-        <h3>Parameters</h3>
-        <div class="input-group">
-          <label>Keyword:</label>
-          <input
-            type="text"
-            id="imageKeyword"
-            placeholder="Leave blank for general image"
-          />
-        </div>
-        <div class="input-group">
-          <label>Seed:</label>
-          <input
-            type="text"
-            id="imageSeed"
-            placeholder="Leave blank for random"
-          />
-        </div>
-      </div>
+    <main>
+      <p>Generate data for placeholders, testing, or database seeding.</p>
+      <p>
+        All APIs support seed parameter to indicate when stable results are
+        needed.
+      </p>
+      <p class="base-url">Base URL: <code>https://sample.hkit.cc</code></p>
 
-      <div class="image-result">
-        <h3>Result</h3>
-        <div class="image-url">
-          <h4>Resolved Image URL</h4>
-          <code id="imageUrlCode"></code>
-        </div>
-        <img id="previewImg" alt="Preview" />
-        <div id="previewError" class="error"></div>
-      </div>
-    </div>
+      <div class="api-section" id="imageAPIContainer">
+        <h2>GET <code>/image</code> API</h2>
 
-    <div class="api-section" id="jsonAPIContainer">
-      <h2>GET <code>/json</code> API</h2>
+        <div class="api-description">
+          <h3>Description</h3>
+          <p>
+            This API searches online for images matching your keyword and
+            redirects to a result. Results are cached to help provide more
+            stable responses when using the seed parameter.
+          </p>
+        </div>
 
-      <div class="api-description">
-        <h3>Description</h3>
-        <p>
-          This API returns structured data in JSON format with locale-aware
-          values. When count is specified, returns an array of objects,
-          otherwise returns a single object.
-        </p>
-      </div>
+        <div class="example">
+          <h3>Example URL</h3>
+          <a id="imageLink" target="_blank"
+            ><code id="imageCode">/image?keyword=cat</code></a
+          >
+        </div>
 
-      <div class="example">
-        <h3>Example URL</h3>
-        <a id="jsonLink" target="_blank"
-          ><code id="jsonCode"
-            >/json?name=users&fields=id+name+title&count=10&locale=zh-HK</code
-          ></a
-        >
-      </div>
+        <div class="api-form">
+          <h3>Parameters</h3>
+          <div class="input-group">
+            <label>Keyword:</label>
+            <input
+              type="text"
+              id="imageKeyword"
+              placeholder="Leave blank for general image"
+            />
+          </div>
+          <div class="input-group">
+            <label>Seed:</label>
+            <input
+              type="text"
+              id="imageSeed"
+              placeholder="Leave blank for random"
+            />
+          </div>
+        </div>
 
-      <div class="api-form">
-        <h3>Parameters</h3>
-        <div class="input-group">
-          <label>Name:</label>
-          <input type="text" id="jsonName" placeholder="Default: 'user'" />
-        </div>
-        <div class="input-group">
-          <label>Fields:</label>
-          <input type="text" id="jsonFields" placeholder="Default: 'id,name'" />
-        </div>
-        <div class="input-group">
-          <label>Count:</label>
-          <input
-            type="number"
-            id="jsonCount"
-            placeholder="Leave blank for single object"
-            min="0"
-            max="100"
-          />
-        </div>
-        <div class="input-group">
-          <label>Locale:</label>
-          <input type="text" id="jsonLocale" placeholder="Default: 'en'" />
-        </div>
-        <div class="input-group">
-          <label>Seed:</label>
-          <input
-            type="text"
-            id="jsonSeed"
-            placeholder="Leave blank for random"
-          />
+        <div class="image-result">
+          <h3>Result</h3>
+          <div class="image-url">
+            <h4>Resolved Image URL</h4>
+            <code id="imageUrlCode"></code>
+          </div>
+          <img id="previewImg" alt="Preview" />
+          <div id="previewError" class="error"></div>
         </div>
       </div>
 
-      <div class="api-notes">
-        <h3>Notes</h3>
-        <ul>
-          <li>
-            <strong>Field Separators:</strong> Fields can be separated by comma,
-            plus sign, or space, e.g. <code>id,name</code> or
-            <code>id+name</code> or <code>id name</code>
-          </li>
-          <li>
-            <strong>Data Generation:</strong> Currently using Faker.js. Will be
-            enhanced with AI-powered generation for more context-aware and
-            realistic content.
-          </li>
-          <li>
-            <strong>AI Guidance:</strong> Use remark parameter to guide AI
-            generation (coming soon)
-          </li>
-        </ul>
+      <div class="api-section" id="jsonAPIContainer">
+        <h2>GET <code>/json</code> API</h2>
+
+        <div class="api-description">
+          <h3>Description</h3>
+          <p>
+            This API returns structured data in JSON format with locale-aware
+            values. When count is specified, returns an array of objects,
+            otherwise returns a single object.
+          </p>
+        </div>
+
+        <div class="example">
+          <h3>Example URL</h3>
+          <a id="jsonLink" target="_blank"
+            ><code id="jsonCode"
+              >/json?name=users&fields=id+name+title&count=10&locale=zh-HK</code
+            ></a
+          >
+        </div>
+
+        <div class="api-form">
+          <h3>Parameters</h3>
+          <div class="input-group">
+            <label>Name:</label>
+            <input type="text" id="jsonName" placeholder="Default: 'user'" />
+          </div>
+          <div class="input-group">
+            <label>Fields:</label>
+            <input
+              type="text"
+              id="jsonFields"
+              placeholder="Default: 'id,name'"
+            />
+          </div>
+          <div class="input-group">
+            <label>Count:</label>
+            <input
+              type="number"
+              id="jsonCount"
+              placeholder="Leave blank for single object"
+              min="0"
+              max="100"
+            />
+          </div>
+          <div class="input-group">
+            <label>Locale:</label>
+            <input type="text" id="jsonLocale" placeholder="Default: 'en'" />
+          </div>
+          <div class="input-group">
+            <label>Seed:</label>
+            <input
+              type="text"
+              id="jsonSeed"
+              placeholder="Leave blank for random"
+            />
+          </div>
+        </div>
+
+        <div class="api-notes">
+          <h3>Notes</h3>
+          <ul>
+            <li>
+              <strong>Field Separators:</strong> Fields can be separated by
+              comma, plus sign, or space, e.g. <code>id,name</code> or
+              <code>id+name</code> or <code>id name</code>
+            </li>
+            <li>
+              <strong>Data Generation:</strong> Currently using Faker.js. Will
+              be enhanced with AI-powered generation for more context-aware and
+              realistic content.
+            </li>
+            <li>
+              <strong>AI Guidance:</strong> Use remark parameter to guide AI
+              generation (coming soon)
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </main>
+
+    <footer>Made with <span class="heart">❤️</span> by Beeno</footer>
 
     <script src="bundle.js"></script>
   </body>
