@@ -6,6 +6,21 @@ export type Keyword = {
   keyword: string
 }
 
+export type Search = {
+  id?: null | number
+  keyword_id: number
+  keyword?: Keyword
+  timestamp: number
+  result_count: null | number
+}
+
+export type Request = {
+  id?: null | number
+  keyword_id: number
+  keyword?: Keyword
+  timestamp: number
+}
+
 export type Image = {
   id?: null | number
   url: string
@@ -25,6 +40,8 @@ export type ImageKeyword = {
 
 export type DBProxy = {
   keyword: Keyword[]
+  search: Search[]
+  request: Request[]
   image: Image[]
   image_keyword: ImageKeyword[]
 }
@@ -33,6 +50,14 @@ export let proxy = proxySchema<DBProxy>({
   db,
   tableFields: {
     keyword: [],
+    search: [
+      /* foreign references */
+      ['keyword', { field: 'keyword_id', table: 'keyword' }],
+    ],
+    request: [
+      /* foreign references */
+      ['keyword', { field: 'keyword_id', table: 'keyword' }],
+    ],
     image: [],
     image_keyword: [
       /* foreign references */

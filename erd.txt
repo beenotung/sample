@@ -21,6 +21,21 @@ id integer PK
 keyword text
 
 
+search
+------
+id integer PK
+keyword_id integer FK >0- keyword.id
+timestamp integer
+result_count integer NULL
+
+
+request
+-------
+id integer PK
+keyword_id integer FK >0- keyword.id
+timestamp integer
+
+
 image
 -----
 id integer PK
@@ -46,6 +61,8 @@ disable_time integer NULL
 # diagram-text: #000000
 # table-bg: #ffffff
 # table-text: #000000
-# keyword (787, 93)
-# image (64, 105)
-# image_keyword (420, 216)
+# keyword (903, 90)
+# search (529, 413)
+# request (534, 592)
+# image (58, 81)
+# image_keyword (467, 215)

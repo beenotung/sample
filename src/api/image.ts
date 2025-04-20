@@ -12,6 +12,8 @@ import {
 import { hashString, matchImageByHash } from '../hash'
 import { testImageAvailability } from '../net'
 import { proxyImageUrl } from '../image-proxy'
+import { proxy } from '../proxy'
+import { doSearchImage, shouldSearchImage } from '../image-search'
 
 export let imageRouter: Router = Router()
 
@@ -47,29 +49,34 @@ imageRouter.get('/', async (req, res) => {
 
     let seed_hash = hashString(seed)
 
+    let timestamp = Date.now()
+
     // Check local database first
     let keyword_id = getKeywordId(keyword)
     let matched_image_ids = matchImageByKeyword({ keyword_id })
 
+    proxy.request.push({ keyword_id, timestamp })
+
     if (matched_image_ids.length > 0) {
       // If there is local result, fetch more images in background
-      setTimeout(() => {
-        searchImage({ keyword })
-          .then(images => {
-            storeImages(images, keyword_id)
-          })
-          .catch(error => console.error('Failed to search image:', error))
-      })
+      if (shouldSearchImage({ timestamp, keyword_id })) {
+        doSearchImage({ keyword, keyword_id, timestamp }).catch(error =>
+          console.error('Failed to search image:', error),
+        )
+      }
     } else {
       // If no local result, wait for search
-      let images = await searchImage({ keyword }).catch(error => {
+      try {
+        matched_image_ids = await doSearchImage({
+          keyword,
+          keyword_id,
+          timestamp,
+        })
+      } catch (error) {
         res.status(HttpStatus.BAD_GATEWAY)
         res.json({ error: String(error) })
         return
-      })
-      if (!images) return
-      // Store search result to database for matching
-      matched_image_ids = storeImages(images, keyword_id)
+      }
     }
 
     // Match closest hash of seed and image id
