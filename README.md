@@ -1,6 +1,6 @@
 # Sample Data API
 
-A simple API service that generates sample data for placeholders, testing, or database seeding.
+Generate sample data (images and JSON) for placeholders, testing, or database seeding.
 
 Visit [https://sample.hkit.cc](https://sample.hkit.cc) for:
 
